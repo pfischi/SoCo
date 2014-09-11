@@ -1,6 +1,93 @@
 Release notes
 *************
 
+Version 0.9
+===========
+
+New Features
+------------
+
+* Alarm configuration (`#171 <https://github.com/SoCo/SoCo/pull/171>`_) ::
+
+    >>> # create an alarm with default properties
+    >>> # my_device is the SoCo instance on which the alarm will be played
+    >>> alarm = Alarm(my_device)
+    >>> print alarm.volume
+    20
+    >>> print get_alarms()
+    set([])
+    >>> # save the alarm to the Sonos system
+    >>> alarm.save()
+    >>> print get_alarms()
+    set([<Alarm id:88@15:26:15 at 0x107abb090>])
+    >>> # update the alarm
+    >>> alarm.recurrence = "ONCE"
+    >>> # Save it again for the change to take effect
+    >>> alarm.save()
+    >>> # Remove it
+    >>> alarm.remove()
+    >>> print get_alarms()
+    set([])
+
+* Methods for browsing the Music library (`#192
+  <https://github.com/SoCo/SoCo/pull/192>`_,
+  `#203 <https://github.com/SoCo/SoCo/pull/203>`_,
+  `#208 <https://github.com/SoCo/SoCo/pull/208>`_) ::
+
+    import soco
+    soc = soco.SoCo('...ipaddress..')
+    some_album = soc.get_albums()['item_list'][0]
+    tracks_in_that_album = soc.browse(some_album)
+
+* Support for full Album Art URIs (`#207
+  <https://github.com/SoCo/SoCo/pull/207>`_)
+
+* Support for music queies (`#214 <https://github.com/SoCo/SoCo/pull/214>`_) ::
+
+    queue = soco.get_queue()
+    for item in queue:
+        print item.title
+
+    print queue.number_returned
+    print queue.total_matches
+    print queue.update_id
+
+* Support for processing of LastChange events (`#194
+  <https://github.com/SoCo/SoCo/pull/194>`_)
+
+
+Improvements
+------------
+
+* Improved test coverage (`#159 <https://github.com/SoCo/SoCo/pull/159>`_,
+  `#184 <https://github.com/SoCo/SoCo/pull/184>`)
+
+* Fixes for Python 2.6 support (`#175
+  <https://github.com/SoCo/SoCo/pull/175>`_)
+
+* Event-subscriptions can be auto-renewed (`#179
+  <https://github.com/SoCo/SoCo/pull/179>`_)
+
+* The ``SoCo`` class can replaced by a custom implementation (`#180
+  <https://github.com/SoCo/SoCo/pull/180>`)
+
+* The cache can be globally disabled (`#180
+  <https://github.com/SoCo/SoCo/pull/180>`)
+
+* Music Library data structures are constructed for DIDL XML content (`#191
+  <https://github.com/SoCo/SoCo/pull/191>`_).
+
+* Added previously removed support for PyPy (`#205
+  <https://github.com/SoCo/SoCo/pull/205>`_)
+
+
+Backwards Compatability
+-----------------------
+
+none?
+
+
+
 Version 0.8
 ===========
 
